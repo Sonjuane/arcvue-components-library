@@ -1,0 +1,70 @@
+/**
+ * Base styles for ArcVue Components
+ * Minimal reset and foundational styles
+ */
+
+/* Box sizing reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Component base styles */
+.arc-component {
+    font-family: var(--arc-font-family);
+    font-size: var(--arc-font-size-base);
+    line-height: var(--arc-line-height-normal);
+    color: var(--arc-color-text);
+}
+
+/* Focus styles for accessibility */
+.arc-component:focus-visible {
+    outline: 2px solid var(--arc-color-primary);
+    outline-offset: 2px;
+}
+
+/* Button reset */
+.arc-button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--arc-transition-fast);
+}
+
+.arc-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Input reset */
+.arc-input {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    outline: none;
+    width: 100%;
+}
+
+/* Utility classes */
+.arc-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

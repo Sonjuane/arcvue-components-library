@@ -1,0 +1,229 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-11-09",
+  "enforcementLevel": "MANDATORY",
+  "description": "Roo Code rule enforcement configuration for automated rule processing and validation",
+  "globalRules": {
+    "enabled": true,
+    "configFile": ".roo/rules/global-rules.md",
+    "rules": {
+      "bugResolutionDocumentation": {
+        "id": "global-rule-1",
+        "enabled": true,
+        "priority": 1,
+        "triggerPatterns": {
+          "documentationFiles": [
+            "README.md",
+            "CHANGELOG.md",
+            "CONTRIBUTING.md",
+            "docs/**/*.md",
+            "*.documentation.md",
+            "**/readme.*",
+            "**/README.*"
+          ],
+          "bugFixIndicators": [
+            "fix",
+            "bug",
+            "error",
+            "issue",
+            "problem",
+            "resolve",
+            "correct"
+          ]
+        },
+        "workflow": {
+          "tool": "ask_followup_question",
+          "blockOperation": true,
+          "requireExplicitApproval": true,
+          "auditLog": true
+        }
+      },
+      "testCreationAuthorization": {
+        "id": "global-rule-2",
+        "enabled": true,
+        "priority": 1,
+        "triggerPatterns": {
+          "testFiles": [
+            "*.test.js",
+            "*.test.ts",
+            "*.spec.js",
+            "*.spec.ts",
+            "*.test.vue",
+            "*.spec.vue",
+            "__tests__/**/*",
+            "test/**/*",
+            "tests/**/*",
+            "jest.config.*",
+            "vitest.config.*",
+            "cypress.config.*"
+          ]
+        },
+        "workflow": {
+          "tool": "ask_followup_question",
+          "blockOperation": true,
+          "requireExplicitApproval": true,
+          "auditLog": true
+        }
+      }
+    }
+  },
+  "projectRules": {
+    "enabled": true,
+    "configFile": ".roo/rules/project-rules.md",
+    "rules": {
+      "componentLibraryProtection": {
+        "id": "project-rule-1",
+        "enabled": true,
+        "priority": 2,
+        "triggerPatterns": {
+          "protectedFiles": [
+            "src/components/**/*.vue",
+            "src/composables/**/*.ts",
+            "vite.config.ts",
+            "package.json",
+            "histoire.config.ts",
+            "server/**/*"
+          ]
+        },
+        "workflow": {
+          "tool": "ask_followup_question",
+          "blockOperation": true,
+          "requireExplicitApproval": true,
+          "auditLog": true
+        }
+      },
+      "buildOutputValidation": {
+        "id": "project-rule-2",
+        "enabled": true,
+        "priority": 2,
+        "triggerPatterns": {
+          "buildCommands": [
+            "pnpm build",
+            "npm run build",
+            "vite build",
+            "pnpm dev",
+            "npm run dev",
+            "vite dev"
+          ],
+          "buildFiles": [
+            "vite.config.*",
+            "package.json",
+            "dist/**/*"
+          ]
+        },
+        "workflow": {
+          "tool": "ask_followup_question",
+          "blockOperation": true,
+          "requireExplicitApproval": true,
+          "auditLog": true
+        }
+      },
+      "histoireDocumentationSync": {
+        "id": "project-rule-3",
+        "enabled": true,
+        "priority": 2,
+        "triggerPatterns": {
+          "componentFiles": [
+            "src/components/**/*.vue"
+          ],
+          "storyFiles": [
+            "*.stories.*",
+            "histoire.config.*"
+          ]
+        },
+        "workflow": {
+          "tool": "ask_followup_question",
+          "blockOperation": true,
+          "requireExplicitApproval": true,
+          "auditLog": true
+        }
+      },
+      "serverDependencyManagement": {
+        "id": "project-rule-4",
+        "enabled": true,
+        "priority": 2,
+        "triggerPatterns": {
+          "serverFiles": [
+            "server/**/*"
+          ],
+          "apiIndicators": [
+            "fetch",
+            "axios",
+            "api",
+            "endpoint",
+            "request"
+          ]
+        },
+        "workflow": {
+          "tool": "ask_followup_question",
+          "blockOperation": true,
+          "requireExplicitApproval": true,
+          "auditLog": true
+        }
+      }
+    }
+  },
+  "enforcement": {
+    "fileOperationHooks": {
+      "enabled": true,
+      "preWriteValidation": true,
+      "preReadValidation": false,
+      "preDeleteValidation": true
+    },
+    "commandInterception": {
+      "enabled": true,
+      "buildCommands": true,
+      "testCommands": true,
+      "installCommands": false
+    },
+    "modeTransitions": {
+      "enforceAcrossModes": true,
+      "blockIncompleteWorkflows": true,
+      "inheritRuleState": true
+    },
+    "auditTrail": {
+      "enabled": true,
+      "logLocation": "memory-bank/decisionLog.md",
+      "includeTimestamps": true,
+      "includeUserDecisions": true,
+      "includeRuleViolations": true
+    }
+  },
+  "exceptions": {
+    "allowedWithoutConfirmation": [
+      "*.md (non-documentation)",
+      "dev_notes/**/*",
+      "*.comments",
+      "*.formatting"
+    ],
+    "emergencyOverride": {
+      "enabled": false,
+      "requiresExplicitUserCommand": true,
+      "auditRequired": true
+    }
+  },
+  "compliance": {
+    "realTimeValidation": true,
+    "memoryBankIntegration": true,
+    "crossModeEnforcement": true,
+    "failSafeMode": "block_all_operations",
+    "violationHandling": {
+      "immediateBlock": true,
+      "userNotification": true,
+      "correctiveAction": true,
+      "auditLog": true
+    }
+  },
+  "monitoring": {
+    "ruleEffectiveness": {
+      "trackApplications": true,
+      "trackUserResponses": true,
+      "trackBypassAttempts": true
+    },
+    "performanceMetrics": {
+      "ruleProcessingTime": true,
+      "userResponseTime": true,
+      "workflowCompletionRate": true
+    }
+  }
+}

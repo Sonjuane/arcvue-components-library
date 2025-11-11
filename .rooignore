@@ -1,0 +1,30 @@
+# Roo Code ignore file
+# This file tells Roo Code which directories and files to ignore
+
+# System prompts directory - contains internal configuration
+system_prompts/
+
+# Common directories to ignore
+node_modules/
+.git/
+dist/
+build/
+.cache/
+.temp/
+.tmp/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
