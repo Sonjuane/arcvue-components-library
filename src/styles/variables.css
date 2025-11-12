@@ -1,74 +1,610 @@
 /**
  * CSS Custom Properties (Variables) for ArcVue Components
- * These variables provide a consistent design system across all components
+ * Comprehensive design system with theme support for both regular DOM and Shadow DOM
  */
 
-:root {
-    /* Colors */
-    --arc-color-primary: #3b82f6;
-    --arc-color-primary-hover: #2563eb;
-    --arc-color-primary-active: #1d4ed8;
+/* ===== LIGHT THEME (DEFAULT) ===== */
+:root,
+:host {
+    /* === COLOR PALETTE === */
 
-    --arc-color-secondary: #6b7280;
-    --arc-color-secondary-hover: #4b5563;
-    --arc-color-secondary-active: #374151;
+    /* Primary Colors */
+    --arc-color-primary-50: #eff6ff;
+    --arc-color-primary-100: #dbeafe;
+    --arc-color-primary-200: #bfdbfe;
+    --arc-color-primary-300: #93c5fd;
+    --arc-color-primary-400: #60a5fa;
+    --arc-color-primary-500: #3b82f6;
+    --arc-color-primary-600: #2563eb;
+    --arc-color-primary-700: #1d4ed8;
+    --arc-color-primary-800: #1e40af;
+    --arc-color-primary-900: #1e3a8a;
 
-    --arc-color-success: #10b981;
-    --arc-color-warning: #f59e0b;
-    --arc-color-error: #ef4444;
+    /* Secondary Colors */
+    --arc-color-secondary-50: #f9fafb;
+    --arc-color-secondary-100: #f3f4f6;
+    --arc-color-secondary-200: #e5e7eb;
+    --arc-color-secondary-300: #d1d5db;
+    --arc-color-secondary-400: #9ca3af;
+    --arc-color-secondary-500: #6b7280;
+    --arc-color-secondary-600: #4b5563;
+    --arc-color-secondary-700: #374151;
+    --arc-color-secondary-800: #1f2937;
+    --arc-color-secondary-900: #111827;
 
-    --arc-color-text: #111827;
-    --arc-color-text-muted: #6b7280;
+    /* Success Colors */
+    --arc-color-success-50: #ecfdf5;
+    --arc-color-success-100: #d1fae5;
+    --arc-color-success-200: #a7f3d0;
+    --arc-color-success-300: #6ee7b7;
+    --arc-color-success-400: #34d399;
+    --arc-color-success-500: #10b981;
+    --arc-color-success-600: #059669;
+    --arc-color-success-700: #047857;
+    --arc-color-success-800: #065f46;
+    --arc-color-success-900: #064e3b;
+
+    /* Warning Colors */
+    --arc-color-warning-50: #fffbeb;
+    --arc-color-warning-100: #fef3c7;
+    --arc-color-warning-200: #fde68a;
+    --arc-color-warning-300: #fcd34d;
+    --arc-color-warning-400: #fbbf24;
+    --arc-color-warning-500: #f59e0b;
+    --arc-color-warning-600: #d97706;
+    --arc-color-warning-700: #b45309;
+    --arc-color-warning-800: #92400e;
+    --arc-color-warning-900: #78350f;
+
+    /* Error Colors */
+    --arc-color-error-50: #fef2f2;
+    --arc-color-error-100: #fee2e2;
+    --arc-color-error-200: #fecaca;
+    --arc-color-error-300: #fca5a5;
+    --arc-color-error-400: #f87171;
+    --arc-color-error-500: #ef4444;
+    --arc-color-error-600: #dc2626;
+    --arc-color-error-700: #b91c1c;
+    --arc-color-error-800: #991b1b;
+    --arc-color-error-900: #7f1d1d;
+
+    /* Neutral Colors */
+    --arc-color-neutral-50: #fafafa;
+    --arc-color-neutral-100: #f5f5f5;
+    --arc-color-neutral-200: #e5e5e5;
+    --arc-color-neutral-300: #d4d4d4;
+    --arc-color-neutral-400: #a3a3a3;
+    --arc-color-neutral-500: #737373;
+    --arc-color-neutral-600: #525252;
+    --arc-color-neutral-700: #404040;
+    --arc-color-neutral-800: #262626;
+    --arc-color-neutral-900: #171717;
+
+    /* === SEMANTIC COLOR TOKENS === */
+
+    /* Primary Semantic Colors */
+    --arc-color-primary: var(--arc-color-primary-500);
+    --arc-color-primary-hover: var(--arc-color-primary-600);
+    --arc-color-primary-active: var(--arc-color-primary-700);
+    --arc-color-primary-light: var(--arc-color-primary-100);
+    --arc-color-primary-dark: var(--arc-color-primary-800);
+
+    /* Secondary Semantic Colors */
+    --arc-color-secondary: var(--arc-color-secondary-500);
+    --arc-color-secondary-hover: var(--arc-color-secondary-600);
+    --arc-color-secondary-active: var(--arc-color-secondary-700);
+    --arc-color-secondary-light: var(--arc-color-secondary-100);
+    --arc-color-secondary-dark: var(--arc-color-secondary-800);
+
+    /* Status Colors */
+    --arc-color-success: var(--arc-color-success-500);
+    --arc-color-success-hover: var(--arc-color-success-600);
+    --arc-color-success-light: var(--arc-color-success-100);
+
+    --arc-color-warning: var(--arc-color-warning-500);
+    --arc-color-warning-hover: var(--arc-color-warning-600);
+    --arc-color-warning-light: var(--arc-color-warning-100);
+
+    --arc-color-error: var(--arc-color-error-500);
+    --arc-color-error-hover: var(--arc-color-error-600);
+    --arc-color-error-light: var(--arc-color-error-100);
+
+    /* Text Colors */
+    --arc-color-text: var(--arc-color-secondary-900);
+    --arc-color-text-muted: var(--arc-color-secondary-600);
+    --arc-color-text-light: var(--arc-color-secondary-400);
     --arc-color-text-inverse: #ffffff;
+    --arc-color-text-on-primary: #ffffff;
+    --arc-color-text-on-secondary: #ffffff;
 
+    /* Background Colors */
     --arc-color-background: #ffffff;
-    --arc-color-background-muted: #f9fafb;
-    --arc-color-border: #e5e7eb;
+    --arc-color-background-muted: var(--arc-color-secondary-50);
+    --arc-color-background-elevated: #ffffff;
+    --arc-color-background-overlay: rgba(0, 0, 0, 0.5);
 
-    /* Typography */
-    --arc-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Border Colors */
+    --arc-color-border: var(--arc-color-secondary-200);
+    --arc-color-border-muted: var(--arc-color-secondary-100);
+    --arc-color-border-strong: var(--arc-color-secondary-300);
+    --arc-color-border-focus: var(--arc-color-primary-500);
+
+    /* === TYPOGRAPHY SYSTEM === */
+
+    /* Font Families */
+    --arc-font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --arc-font-family-serif: Georgia, 'Times New Roman', Times, serif;
+    --arc-font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    --arc-font-family: var(--arc-font-family-sans);
+
+    /* Font Sizes */
+    --arc-font-size-2xs: 0.625rem;
+    /* 10px */
     --arc-font-size-xs: 0.75rem;
+    /* 12px */
     --arc-font-size-sm: 0.875rem;
+    /* 14px */
     --arc-font-size-base: 1rem;
+    /* 16px */
     --arc-font-size-lg: 1.125rem;
+    /* 18px */
     --arc-font-size-xl: 1.25rem;
+    /* 20px */
+    --arc-font-size-2xl: 1.5rem;
+    /* 24px */
+    --arc-font-size-3xl: 1.875rem;
+    /* 30px */
+    --arc-font-size-4xl: 2.25rem;
+    /* 36px */
+    --arc-font-size-5xl: 3rem;
+    /* 48px */
+    --arc-font-size-6xl: 3.75rem;
+    /* 60px */
 
+    /* Font Weights */
+    --arc-font-weight-thin: 100;
+    --arc-font-weight-light: 300;
     --arc-font-weight-normal: 400;
     --arc-font-weight-medium: 500;
     --arc-font-weight-semibold: 600;
     --arc-font-weight-bold: 700;
+    --arc-font-weight-extrabold: 800;
+    --arc-font-weight-black: 900;
 
+    /* Line Heights */
+    --arc-line-height-none: 1;
     --arc-line-height-tight: 1.25;
+    --arc-line-height-snug: 1.375;
     --arc-line-height-normal: 1.5;
-    --arc-line-height-relaxed: 1.75;
+    --arc-line-height-relaxed: 1.625;
+    --arc-line-height-loose: 2;
 
-    /* Spacing */
-    --arc-spacing-xs: 0.25rem;
-    --arc-spacing-sm: 0.5rem;
-    --arc-spacing-md: 1rem;
-    --arc-spacing-lg: 1.5rem;
-    --arc-spacing-xl: 2rem;
-    --arc-spacing-2xl: 3rem;
+    /* Letter Spacing */
+    --arc-letter-spacing-tighter: -0.05em;
+    --arc-letter-spacing-tight: -0.025em;
+    --arc-letter-spacing-normal: 0em;
+    --arc-letter-spacing-wide: 0.025em;
+    --arc-letter-spacing-wider: 0.05em;
+    --arc-letter-spacing-widest: 0.1em;
 
-    /* Border Radius */
-    --arc-radius-sm: 0.25rem;
+    /* === SPACING SYSTEM === */
+
+    --arc-spacing-0: 0;
+    --arc-spacing-px: 1px;
+    --arc-spacing-0_5: 0.125rem;
+    /* 2px */
+    --arc-spacing-1: 0.25rem;
+    /* 4px */
+    --arc-spacing-1_5: 0.375rem;
+    /* 6px */
+    --arc-spacing-2: 0.5rem;
+    /* 8px */
+    --arc-spacing-2_5: 0.625rem;
+    /* 10px */
+    --arc-spacing-3: 0.75rem;
+    /* 12px */
+    --arc-spacing-3_5: 0.875rem;
+    /* 14px */
+    --arc-spacing-4: 1rem;
+    /* 16px */
+    --arc-spacing-5: 1.25rem;
+    /* 20px */
+    --arc-spacing-6: 1.5rem;
+    /* 24px */
+    --arc-spacing-7: 1.75rem;
+    /* 28px */
+    --arc-spacing-8: 2rem;
+    /* 32px */
+    --arc-spacing-9: 2.25rem;
+    /* 36px */
+    --arc-spacing-10: 2.5rem;
+    /* 40px */
+    --arc-spacing-11: 2.75rem;
+    /* 44px */
+    --arc-spacing-12: 3rem;
+    /* 48px */
+    --arc-spacing-14: 3.5rem;
+    /* 56px */
+    --arc-spacing-16: 4rem;
+    /* 64px */
+    --arc-spacing-20: 5rem;
+    /* 80px */
+    --arc-spacing-24: 6rem;
+    /* 96px */
+    --arc-spacing-28: 7rem;
+    /* 112px */
+    --arc-spacing-32: 8rem;
+    /* 128px */
+
+    /* Legacy spacing aliases */
+    --arc-spacing-xs: var(--arc-spacing-1);
+    --arc-spacing-sm: var(--arc-spacing-2);
+    --arc-spacing-md: var(--arc-spacing-4);
+    --arc-spacing-lg: var(--arc-spacing-6);
+    --arc-spacing-xl: var(--arc-spacing-8);
+    --arc-spacing-2xl: var(--arc-spacing-12);
+
+    /* === BORDER RADIUS === */
+
+    --arc-radius-none: 0;
+    --arc-radius-sm: 0.125rem;
+    /* 2px */
+    --arc-radius-base: 0.25rem;
+    /* 4px */
     --arc-radius-md: 0.375rem;
+    /* 6px */
     --arc-radius-lg: 0.5rem;
+    /* 8px */
     --arc-radius-xl: 0.75rem;
+    /* 12px */
+    --arc-radius-2xl: 1rem;
+    /* 16px */
+    --arc-radius-3xl: 1.5rem;
+    /* 24px */
     --arc-radius-full: 9999px;
 
-    /* Shadows */
-    --arc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    /* === SHADOWS === */
+
+    --arc-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --arc-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --arc-shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     --arc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --arc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --arc-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --arc-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    --arc-shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+    --arc-shadow-none: 0 0 #0000;
 
-    /* Transitions */
-    --arc-transition-fast: 150ms ease-in-out;
-    --arc-transition-normal: 250ms ease-in-out;
-    --arc-transition-slow: 350ms ease-in-out;
+    /* Focus shadows */
+    --arc-shadow-focus: 0 0 0 3px rgb(59 130 246 / 0.15);
+    --arc-shadow-focus-error: 0 0 0 3px rgb(239 68 68 / 0.15);
+    --arc-shadow-focus-success: 0 0 0 3px rgb(16 185 129 / 0.15);
 
-    /* Z-index */
+    /* === TRANSITIONS & ANIMATIONS === */
+
+    /* Transition Durations */
+    --arc-duration-75: 75ms;
+    --arc-duration-100: 100ms;
+    --arc-duration-150: 150ms;
+    --arc-duration-200: 200ms;
+    --arc-duration-300: 300ms;
+    --arc-duration-500: 500ms;
+    --arc-duration-700: 700ms;
+    --arc-duration-1000: 1000ms;
+
+    /* Transition Timing Functions */
+    --arc-ease-linear: linear;
+    --arc-ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --arc-ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --arc-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Common Transitions */
+    --arc-transition-fast: var(--arc-duration-150) var(--arc-ease-out);
+    --arc-transition-normal: var(--arc-duration-200) var(--arc-ease-out);
+    --arc-transition-slow: var(--arc-duration-300) var(--arc-ease-out);
+    --arc-transition-all: all var(--arc-transition-normal);
+    --arc-transition-colors: color var(--arc-transition-fast), background-color var(--arc-transition-fast), border-color var(--arc-transition-fast);
+    --arc-transition-opacity: opacity var(--arc-transition-fast);
+    --arc-transition-shadow: box-shadow var(--arc-transition-fast);
+    --arc-transition-transform: transform var(--arc-transition-fast);
+
+    /* === Z-INDEX SCALE === */
+
+    --arc-z-hide: -1;
+    --arc-z-auto: auto;
+    --arc-z-base: 0;
+    --arc-z-docked: 10;
     --arc-z-dropdown: 1000;
+    --arc-z-sticky: 1020;
+    --arc-z-banner: 1030;
+    --arc-z-overlay: 1040;
     --arc-z-modal: 1050;
-    --arc-z-tooltip: 1100;
+    --arc-z-popover: 1060;
+    --arc-z-skiplink: 1070;
+    --arc-z-toast: 1080;
+    --arc-z-tooltip: 1090;
+
+    /* === BREAKPOINTS === */
+
+    --arc-breakpoint-sm: 640px;
+    --arc-breakpoint-md: 768px;
+    --arc-breakpoint-lg: 1024px;
+    --arc-breakpoint-xl: 1280px;
+    --arc-breakpoint-2xl: 1536px;
+}
+
+/* ===== DARK THEME ===== */
+[data-theme="dark"],
+:root[data-theme="dark"],
+:host([data-theme="dark"]) {
+    /* Text Colors */
+    --arc-color-text: var(--arc-color-neutral-100);
+    --arc-color-text-muted: var(--arc-color-neutral-400);
+    --arc-color-text-light: var(--arc-color-neutral-500);
+    --arc-color-text-inverse: var(--arc-color-neutral-900);
+
+    /* Background Colors */
+    --arc-color-background: var(--arc-color-neutral-900);
+    --arc-color-background-muted: var(--arc-color-neutral-800);
+    --arc-color-background-elevated: var(--arc-color-neutral-800);
+    --arc-color-background-overlay: rgba(0, 0, 0, 0.8);
+
+    /* Border Colors */
+    --arc-color-border: var(--arc-color-neutral-700);
+    --arc-color-border-muted: var(--arc-color-neutral-800);
+    --arc-color-border-strong: var(--arc-color-neutral-600);
+
+    /* Secondary Colors (adjusted for dark theme) */
+    --arc-color-secondary: var(--arc-color-neutral-400);
+    --arc-color-secondary-hover: var(--arc-color-neutral-300);
+    --arc-color-secondary-active: var(--arc-color-neutral-200);
+    --arc-color-secondary-light: var(--arc-color-neutral-800);
+    --arc-color-secondary-dark: var(--arc-color-neutral-200);
+
+    /* Shadows (adjusted for dark theme) */
+    --arc-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --arc-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+    --arc-shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+    --arc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --arc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --arc-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    --arc-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+    --arc-shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.3);
+}
+
+/* ===== REDUCED MOTION SUPPORT ===== */
+@media (prefers-reduced-motion: reduce) {
+
+    :root,
+    :host {
+        --arc-transition-fast: none;
+        --arc-transition-normal: none;
+        --arc-transition-slow: none;
+        --arc-transition-all: none;
+        --arc-transition-colors: none;
+        --arc-transition-opacity: none;
+        --arc-transition-shadow: none;
+        --arc-transition-transform: none;
+    }
+
+    /* ===== COMPONENT-SPECIFIC VARIABLES ===== */
+
+    /* === CARD SYSTEM === */
+    :root,
+    :host {
+        /* Card backgrounds */
+        --arc-card-bg: var(--arc-color-background);
+        --arc-card-bg-hover: var(--arc-color-background-elevated);
+
+        /* Card borders */
+        --arc-card-border-width: 1px;
+        --arc-card-border-color: var(--arc-color-border);
+        --arc-card-border-hover: var(--arc-color-border-strong);
+        --arc-card-border-radius: var(--arc-radius-lg);
+
+        /* Card padding */
+        --arc-card-padding: var(--arc-spacing-4);
+        --arc-card-padding-sm: var(--arc-spacing-3);
+        --arc-card-padding-lg: var(--arc-spacing-6);
+
+        /* Card shadows */
+        --arc-card-shadow: var(--arc-shadow-sm);
+        --arc-card-shadow-hover: var(--arc-shadow-md);
+
+        /* Card header */
+        --arc-card-header-bg: transparent;
+        --arc-card-header-border: var(--arc-color-border);
+        --arc-card-header-padding: var(--arc-spacing-4);
+
+        /* Card footer */
+        --arc-card-footer-bg: var(--arc-color-background-muted);
+        --arc-card-footer-border: var(--arc-color-border);
+        --arc-card-footer-padding: var(--arc-spacing-4);
+    }
+
+    /* === MODAL SYSTEM === */
+    :root,
+    :host {
+        /* Modal backdrop */
+        --arc-modal-backdrop: var(--arc-color-background-overlay);
+        --arc-modal-backdrop-z: var(--arc-z-overlay);
+
+        /* Modal container */
+        --arc-modal-bg: var(--arc-color-background);
+        --arc-modal-border-radius: var(--arc-radius-xl);
+        --arc-modal-shadow: var(--arc-shadow-2xl);
+        --arc-modal-z: var(--arc-z-modal);
+
+        /* Modal sizing */
+        --arc-modal-max-width: 90vw;
+        --arc-modal-max-height: 90vh;
+        --arc-modal-padding: var(--arc-spacing-6);
+
+        /* Modal animations */
+        --arc-modal-duration: var(--arc-duration-300);
+        --arc-modal-timing: var(--arc-ease-out);
+
+        /* Modal header */
+        --arc-modal-header-padding: var(--arc-spacing-6);
+        --arc-modal-header-border: var(--arc-color-border);
+
+        /* Modal footer */
+        --arc-modal-footer-padding: var(--arc-spacing-6);
+        --arc-modal-footer-border: var(--arc-color-border);
+        --arc-modal-footer-bg: var(--arc-color-background-muted);
+    }
+
+    /* === ELEVATION SYSTEM === */
+    :root,
+    :host {
+        /* Elevation levels - consistent shadow system */
+        --arc-elevation-0: var(--arc-shadow-none);
+        --arc-elevation-1: var(--arc-shadow-sm);
+        --arc-elevation-2: var(--arc-shadow-base);
+        --arc-elevation-3: var(--arc-shadow-md);
+        --arc-elevation-4: var(--arc-shadow-lg);
+        --arc-elevation-5: var(--arc-shadow-xl);
+        --arc-elevation-6: var(--arc-shadow-2xl);
+    }
+
+    /* === INPUT SYSTEM === */
+    :root,
+    :host {
+        /* Input backgrounds */
+        --arc-input-bg: var(--arc-color-background);
+        --arc-input-bg-disabled: var(--arc-color-background-muted);
+
+        /* Input borders */
+        --arc-input-border-width: 1px;
+        --arc-input-border-color: var(--arc-color-border);
+        --arc-input-border-hover: var(--arc-color-border-strong);
+        --arc-input-border-focus: var(--arc-color-border-focus);
+        --arc-input-border-radius: var(--arc-radius-md);
+
+        /* Input padding */
+        --arc-input-padding-y: var(--arc-spacing-2);
+        --arc-input-padding-x: var(--arc-spacing-3);
+        --arc-input-padding-sm-y: var(--arc-spacing-1_5);
+        --arc-input-padding-sm-x: var(--arc-spacing-2);
+        --arc-input-padding-lg-y: var(--arc-spacing-3);
+        --arc-input-padding-lg-x: var(--arc-spacing-4);
+
+        /* Input states */
+        --arc-input-shadow-focus: var(--arc-shadow-focus);
+        --arc-input-shadow-error: var(--arc-shadow-focus-error);
+        --arc-input-shadow-success: var(--arc-shadow-focus-success);
+    }
+
+    /* === BUTTON SYSTEM === */
+    :root,
+    :host {
+        /* Button padding */
+        --arc-button-padding-y: var(--arc-spacing-2);
+        --arc-button-padding-x: var(--arc-spacing-4);
+        --arc-button-padding-sm-y: var(--arc-spacing-1_5);
+        --arc-button-padding-sm-x: var(--arc-spacing-3);
+        --arc-button-padding-lg-y: var(--arc-spacing-3);
+        --arc-button-padding-lg-x: var(--arc-spacing-6);
+
+        /* Button border */
+        --arc-button-border-width: 1px;
+        --arc-button-border-radius: var(--arc-radius-md);
+
+        /* Button transitions */
+        --arc-button-transition: var(--arc-transition-colors);
+    }
+
+    /* === TYPOGRAPHY SCALE === */
+    :root,
+    :host {
+        /* Text sizes with line heights */
+        --arc-text-xs: var(--arc-font-size-xs);
+        --arc-text-xs-height: var(--arc-line-height-normal);
+
+        --arc-text-sm: var(--arc-font-size-sm);
+        --arc-text-sm-height: var(--arc-line-height-normal);
+
+        --arc-text-base: var(--arc-font-size-base);
+        --arc-text-base-height: var(--arc-line-height-normal);
+
+        --arc-text-lg: var(--arc-font-size-lg);
+        --arc-text-lg-height: var(--arc-line-height-normal);
+
+        --arc-text-xl: var(--arc-font-size-xl);
+        --arc-text-xl-height: var(--arc-line-height-tight);
+
+        --arc-text-2xl: var(--arc-font-size-2xl);
+        --arc-text-2xl-height: var(--arc-line-height-tight);
+
+        --arc-text-3xl: var(--arc-font-size-3xl);
+        --arc-text-3xl-height: var(--arc-line-height-tight);
+
+        --arc-text-4xl: var(--arc-font-size-4xl);
+        --arc-text-4xl-height: var(--arc-line-height-none);
+
+        /* Heading styles */
+        --arc-heading-weight: var(--arc-font-weight-bold);
+        --arc-heading-color: var(--arc-color-text);
+    }
+
+    /* === ANIMATION SYSTEM === */
+    :root,
+    :host {
+        /* Transition presets */
+        --arc-transition-base: all var(--arc-duration-200) var(--arc-ease-out);
+        --arc-transition-fast: all var(--arc-duration-150) var(--arc-ease-out);
+        --arc-transition-slow: all var(--arc-duration-300) var(--arc-ease-out);
+
+        /* Specific property transitions */
+        --arc-transition-color: color var(--arc-duration-150) var(--arc-ease-out);
+        --arc-transition-bg: background-color var(--arc-duration-150) var(--arc-ease-out);
+        --arc-transition-border: border-color var(--arc-duration-150) var(--arc-ease-out);
+        --arc-transition-shadow: box-shadow var(--arc-duration-150) var(--arc-ease-out);
+        --arc-transition-transform: transform var(--arc-duration-150) var(--arc-ease-out);
+        --arc-transition-opacity: opacity var(--arc-duration-150) var(--arc-ease-out);
+    }
+
+    /* === LAYOUT SYSTEM === */
+    :root,
+    :host {
+        /* Container widths */
+        --arc-container-sm: 640px;
+        --arc-container-md: 768px;
+        --arc-container-lg: 1024px;
+        --arc-container-xl: 1280px;
+        --arc-container-2xl: 1536px;
+
+        /* Content widths */
+        --arc-content-narrow: 65ch;
+        --arc-content-normal: 80ch;
+        --arc-content-wide: 100ch;
+
+        /* Sidebar widths */
+        --arc-sidebar-narrow: 240px;
+        --arc-sidebar-normal: 280px;
+        --arc-sidebar-wide: 320px;
+    }
+
+    /* === DARK THEME OVERRIDES FOR COMPONENTS === */
+    [data-theme="dark"],
+    :root[data-theme="dark"],
+    :host([data-theme="dark"]) {
+        /* Card system */
+        --arc-card-bg: var(--arc-color-neutral-800);
+        --arc-card-bg-hover: var(--arc-color-neutral-700);
+        --arc-card-border-color: var(--arc-color-neutral-700);
+        --arc-card-border-hover: var(--arc-color-neutral-600);
+        --arc-card-footer-bg: var(--arc-color-neutral-900);
+
+        /* Modal system */
+        --arc-modal-bg: var(--arc-color-neutral-800);
+        --arc-modal-backdrop: rgba(0, 0, 0, 0.8);
+        --arc-modal-footer-bg: var(--arc-color-neutral-900);
+
+        /* Input system */
+        --arc-input-bg: var(--arc-color-neutral-800);
+        --arc-input-bg-disabled: var(--arc-color-neutral-900);
+        --arc-input-border-color: var(--arc-color-neutral-700);
+        --arc-input-border-hover: var(--arc-color-neutral-600);
+    }
 }

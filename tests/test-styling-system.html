@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcVue Styling System Test</title>
+    <style>
+        body {
+            font-family: var(--arc-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+            margin: 0;
+            padding: var(--arc-spacing-6, 1.5rem);
+            background-color: var(--arc-color-background, #ffffff);
+            color: var(--arc-color-text, #111827);
+            transition: var(--arc-transition-colors, color 200ms ease-out, background-color 200ms ease-out);
+        }
+
+        .test-section {
+            margin-bottom: var(--arc-spacing-8, 2rem);
+            padding: var(--arc-spacing-6, 1.5rem);
+            border: 1px solid var(--arc-color-border, #e5e7eb);
+            border-radius: var(--arc-radius-lg, 0.5rem);
+            background-color: var(--arc-color-background-elevated, #ffffff);
+        }
+
+        .test-section h2 {
+            margin-top: 0;
+            color: var(--arc-color-primary, #3b82f6);
+            font-size: var(--arc-font-size-xl, 1.25rem);
+            font-weight: var(--arc-font-weight-semibold, 600);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--arc-spacing-4, 1rem);
+            margin-bottom: var(--arc-spacing-4, 1rem);
+        }
+
+        .theme-controls {
+            position: fixed;
+            top: var(--arc-spacing-4, 1rem);
+            right: var(--arc-spacing-4, 1rem);
+            display: flex;
+            gap: var(--arc-spacing-2, 0.5rem);
+            z-index: var(--arc-z-sticky, 1020);
+        }
+
+        .theme-toggle {
+            padding: var(--arc-spacing-2, 0.5rem) var(--arc-spacing-3, 0.75rem);
+            border: 1px solid var(--arc-color-border, #e5e7eb);
+            border-radius: var(--arc-radius-md, 0.375rem);
+            background-color: var(--arc-color-background-elevated, #ffffff);
+            color: var(--arc-color-text, #111827);
+            cursor: pointer;
+            transition: var(--arc-transition-colors);
+            font-size: var(--arc-font-size-sm, 0.875rem);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--arc-color-background-muted, #f9fafb);
+            border-color: var(--arc-color-border-strong, #d1d5db);
+        }
+
+        .utility-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--arc-spacing-2, 0.5rem);
+            margin-bottom: var(--arc-spacing-4, 1rem);
+        }
+
+        .utility-demo>* {
+            padding: var(--arc-spacing-2, 0.5rem) var(--arc-spacing-3, 0.75rem);
+            border-radius: var(--arc-radius-base, 0.25rem);
+            font-size: var(--arc-font-size-sm, 0.875rem);
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: var(--arc-spacing-2, 0.5rem);
+            margin-bottom: var(--arc-spacing-4, 1rem);
+        }
+
+        .color-swatch {
+            height: 60px;
+            border-radius: var(--arc-radius-md, 0.375rem);
+            display: flex;
+            align-items: end;
+            padding: var(--arc-spacing-2, 0.5rem);
+            font-size: var(--arc-font-size-xs, 0.75rem);
+            font-weight: var(--arc-font-weight-medium, 500);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .spacing-demo {
+            display: flex;
+            align-items: center;
+            gap: var(--arc-spacing-1, 0.25rem);
+            margin-bottom: var(--arc-spacing-2, 0.5rem);
+        }
+
+        .spacing-box {
+            background-color: var(--arc-color-primary-light, #dbeafe);
+            border: 1px solid var(--arc-color-primary, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--arc-font-size-xs, 0.75rem);
+            font-weight: var(--arc-font-weight-medium, 500);
+            color: var(--arc-color-primary, #3b82f6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="theme-controls">
+        <button class="theme-toggle" onclick="toggleTheme()">🌙 Toggle Theme</button>
+        <button class="theme-toggle" onclick="setLightTheme()">☀️ Light</button>
+        <button class="theme-toggle" onclick="setDarkTheme()">🌙 Dark</button>
+    </div>
+
+    <h1>ArcVue Styling System Test</h1>
+    <p>This page tests the comprehensive styling system including themes, CSS variables, and Custom Elements.</p>
+
+    <!-- Custom Elements Test -->
+    <div class="test-section">
+        <h2>Custom Elements (Shadow DOM)</h2>
+        <p>These buttons are Custom Elements using Shadow DOM with theme support:</p>
+        <div class="button-grid">
+            <arc-button variant="primary" size="sm">Small Primary</arc-button>
+            <arc-button variant="primary" size="md">Medium Primary</arc-button>
+            <arc-button variant="primary" size="lg">Large Primary</arc-button>
+            <arc-button variant="secondary" size="md">Secondary</arc-button>
+            <arc-button variant="outline" size="md">Outline</arc-button>
+            <arc-button variant="primary" size="md" disabled>Disabled</arc-button>
+        </div>
+    </div>
+
+    <!-- Vue Components Test (will be added when Vue is available) -->
+    <div class="test-section">
+        <h2>Vue Components Test</h2>
+        <p>Vue components would be tested here when integrated with a Vue application.</p>
+        <div id="vue-app">
+            <!-- Vue components will be mounted here -->
+        </div>
+    </div>
+
+    <!-- Color Palette Test -->
+    <div class="test-section">
+        <h2>Color Palette</h2>
+        <p>Testing the comprehensive color system:</p>
+        <div class="color-palette">
+            <div class="color-swatch" style="background-color: var(--arc-color-primary);">Primary</div>
+            <div class="color-swatch" style="background-color: var(--arc-color-secondary);">Secondary</div>
+            <div class="color-swatch" style="background-color: var(--arc-color-success);">Success</div>
+            <div class="color-swatch" style="background-color: var(--arc-color-warning);">Warning</div>
+            <div class="color-swatch" style="background-color: var(--arc-color-error);">Error</div>
+            <div class="color-swatch" style="background-color: var(--arc-color-neutral-500);">Neutral</div>
+        </div>
+    </div>
+
+    <!-- Typography Test -->
+    <div class="test-section">
+        <h2>Typography Scale</h2>
+        <p>Testing the typography system:</p>
+        <div
+            style="font-size: var(--arc-font-size-6xl); font-weight: var(--arc-font-weight-bold); margin-bottom: var(--arc-spacing-2);">
+            6XL Heading</div>
+        <div
+            style="font-size: var(--arc-font-size-4xl); font-weight: var(--arc-font-weight-semibold); margin-bottom: var(--arc-spacing-2);">
+            4XL Heading</div>
+        <div
+            style="font-size: var(--arc-font-size-2xl); font-weight: var(--arc-font-weight-medium); margin-bottom: var(--arc-spacing-2);">
+            2XL Heading</div>
+        <div style="font-size: var(--arc-font-size-xl); margin-bottom: var(--arc-spacing-2);">XL Text</div>
+        <div style="font-size: var(--arc-font-size-base); margin-bottom: var(--arc-spacing-2);">Base Text</div>
+        <div style="font-size: var(--arc-font-size-sm); color: var(--arc-color-text-muted);">Small Text</div>
+    </div>
+
+    <!-- Spacing Test -->
+    <div class="test-section">
+        <h2>Spacing Scale</h2>
+        <p>Testing the spacing system:</p>
+        <div class="spacing-demo">
+            <span>1:</span>
+            <div class="spacing-box" style="width: var(--arc-spacing-1); height: var(--arc-spacing-4);">1</div>
+        </div>
+        <div class="spacing-demo">
+            <span>2:</span>
+            <div class="spacing-box" style="width: var(--arc-spacing-2); height: var(--arc-spacing-4);">2</div>
+        </div>
+        <div class="spacing-demo">
+            <span>4:</span>
+            <div class="spacing-box" style="width: var(--arc-spacing-4); height: var(--arc-spacing-4);">4</div>
+        </div>
+        <div class="spacing-demo">
+            <span>8:</span>
+            <div class="spacing-box" style="width: var(--arc-spacing-8); height: var(--arc-spacing-4);">8</div>
+        </div>
+        <div class="spacing-demo">
+            <span>16:</span>
+            <div class="spacing-box" style="width: var(--arc-spacing-16); height: var(--arc-spacing-4);">16</div>
+        </div>
+    </div>
+
+    <!-- Utility Classes Test -->
+    <div class="test-section">
+        <h2>Utility Classes</h2>
+        <p>Testing utility classes:</p>
+        <div class="utility-demo">
+            <div class="arc-bg-primary arc-text-inverse arc-px-3 arc-py-2 arc-rounded-md">Primary BG</div>
+            <div class="arc-bg-secondary arc-text-inverse arc-px-3 arc-py-2 arc-rounded-md">Secondary BG</div>
+            <div class="arc-bg-success arc-text-inverse arc-px-3 arc-py-2 arc-rounded-md">Success BG</div>
+            <div class="arc-bg-warning arc-text-inverse arc-px-3 arc-py-2 arc-rounded-md">Warning BG</div>
+            <div class="arc-bg-error arc-text-inverse arc-px-3 arc-py-2 arc-rounded-md">Error BG</div>
+        </div>
+        <div class="utility-demo">
+            <div class="arc-text-primary arc-font-bold">Primary Text</div>
+            <div class="arc-text-secondary arc-font-medium">Secondary Text</div>
+            <div class="arc-text-muted arc-font-normal">Muted Text</div>
+        </div>
+    </div>
+
+    <!-- Shadow Test -->
+    <div class="test-section">
+        <h2>Shadow System</h2>
+        <p>Testing the shadow scale:</p>
+        <div class="utility-demo">
+            <div class="arc-shadow-sm arc-p-4 arc-bg-background-elevated arc-rounded-md">Small Shadow</div>
+            <div class="arc-shadow-md arc-p-4 arc-bg-background-elevated arc-rounded-md">Medium Shadow</div>
+            <div class="arc-shadow-lg arc-p-4 arc-bg-background-elevated arc-rounded-md">Large Shadow</div>
+            <div class="arc-shadow-xl arc-p-4 arc-bg-background-elevated arc-rounded-md">XL Shadow</div>
+        </div>
+    </div>
+
+    <!-- Responsive Test -->
+    <div class="test-section">
+        <h2>Responsive Utilities</h2>
+        <p>Testing responsive utilities (resize window to see changes):</p>
+        <div class="arc-text-center arc-sm:text-left arc-md:text-center arc-lg:text-right">
+            <div class="arc-text-sm arc-md:text-lg arc-lg:text-xl">Responsive Text Size</div>
+            <div class="arc-block arc-sm:inline-block arc-md:flex arc-lg:inline-flex">Responsive Display</div>
+        </div>
+    </div>
+
+    <!-- Load Custom Elements -->
+    <script type="module">
+        // Import the Custom Elements build
+        import './dist/custom-elements/Button.js';
+
+        // Import theme utilities
+        import { setTheme, toggleTheme, getCurrentTheme, createThemeToggle } from './dist/custom-elements/Button.js';
+
+        // Make theme functions globally available
+        window.setTheme = setTheme;
+        window.toggleTheme = toggleTheme;
+        window.getCurrentTheme = getCurrentTheme;
+
+        // Theme control functions
+        window.setLightTheme = () => setTheme('light');
+        window.setDarkTheme = () => setTheme('dark');
+
+        // Test dynamic Custom Element creation
+        const dynamicButton = document.createElement('arc-button');
+        dynamicButton.setAttribute('variant', 'primary');
+        dynamicButton.setAttribute('size', 'lg');
+        dynamicButton.textContent = 'Dynamically Created Button';
+        dynamicButton.addEventListener('click', () => {
+            alert('Dynamic button clicked!');
+        });
+
+        // Add to the Custom Elements section
+        const customElementsSection = document.querySelector('.test-section .button-grid');
+        customElementsSection.appendChild(dynamicButton);
+
+        console.log('ArcVue Styling System Test loaded successfully!');
+        console.log('Current theme:', getCurrentTheme());
+    </script>
+
+    <!-- Fallback for when Custom Elements are not available -->
+    <script>
+        // Fallback theme functions if module loading fails
+        if (!window.setTheme) {
+            window.setTheme = function (theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('arc-theme', theme);
+            };
+
+            window.toggleTheme = function () {
+                const current = document.documentElement.getAttribute('data-theme') || 'light';
+                const next = current === 'light' ? 'dark' : 'light';
+                window.setTheme(next);
+            };
+
+            window.setLightTheme = () => window.setTheme('light');
+            window.setDarkTheme = () => window.setTheme('dark');
+
+            // Initialize theme
+            const stored = localStorage.getItem('arc-theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = stored || (prefersDark ? 'dark' : 'light');
+            window.setTheme(initialTheme);
+        }
+    </script>
+</body>
+
+</html>

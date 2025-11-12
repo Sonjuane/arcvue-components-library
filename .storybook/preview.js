@@ -3,8 +3,10 @@
  * Global settings, decorators, and parameters
  */
 
+
 import '../src/styles/variables.css'
 import '../src/styles/base.css'
+
 
 /**
  * Global parameters for all stories
@@ -23,24 +25,25 @@ export const parameters = {
         }
     },
     backgrounds: {
-        default: 'light',
-        values: [
-            {
+        options: {
+            light: {
                 name: 'light',
                 value: '#ffffff'
             },
-            {
+
+            dark: {
                 name: 'dark',
                 value: '#1a1a1a'
             },
-            {
+
+            gray: {
                 name: 'gray',
                 value: '#f5f5f5'
             }
-        ]
+        }
     },
     viewport: {
-        viewports: {
+        options: {
             mobile: {
                 name: 'Mobile',
                 styles: {
@@ -95,3 +98,9 @@ export const globalTypes = {
         }
     }
 }
+
+export const initialGlobals = {
+    backgrounds: {
+        value: 'light'
+    }
+};

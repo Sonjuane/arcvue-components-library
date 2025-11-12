@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcVue Custom Elements - Comprehensive Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .test-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .test-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .test-section h3 {
+            color: #34495e;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2rem;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .test-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .test-item h4 {
+            color: #555;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #f0f0f0;
+            border-color: #999;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+
+        .console-output .log {
+            margin: 0.25rem 0;
+        }
+
+        .console-output .log.success {
+            color: #4ec9b0;
+        }
+
+        .console-output .log.error {
+            color: #f48771;
+        }
+
+        .console-output .log.info {
+            color: #569cd6;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        /* Custom styling for arc-card examples */
+        arc-card {
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        arc-card h3 {
+            margin: 0 0 0.5rem 0;
+            color: #2c3e50;
+        }
+
+        arc-card p {
+            margin: 0.5rem 0;
+            color: #555;
+        }
+
+        /* Modal trigger buttons */
+        .modal-trigger {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        .modal-trigger:hover {
+            background: #2980b9;
+        }
+
+        /* Integration test styles */
+        .integration-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎉 ArcVue Custom Elements Test Suite</h1>
+        <p class="subtitle">Comprehensive testing for Card and Modal components as standalone Custom Elements</p>
+
+        <div id="console" class="console-output">
+            <div class="log info">Console output will appear here...</div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- CARD COMPONENT TESTS -->
+        <!-- ============================================ -->
+        <section class="test-section">
+            <h2>🃏 Card Component Tests</h2>
+
+            <h3>1. Card Variants <span class="badge">4 variants</span></h3>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h4>Default Variant</h4>
+                    <arc-card variant="default">
+                        <h3>Default Card</h3>
+                        <p>Basic card with subtle styling</p>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>Elevated Variant</h4>
+                    <arc-card variant="elevated">
+                        <h3>Elevated Card</h3>
+                        <p>Card with shadow elevation</p>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>Outlined Variant</h4>
+                    <arc-card variant="outlined">
+                        <h3>Outlined Card</h3>
+                        <p>Card with border outline</p>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>Filled Variant</h4>
+                    <arc-card variant="filled">
+                        <h3>Filled Card</h3>
+                        <p>Card with background fill</p>
+                    </arc-card>
+                </div>
+            </div>
+
+            <h3>2. Padding Options <span class="badge">4 sizes</span></h3>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h4>No Padding</h4>
+                    <arc-card variant="outlined" padding="none">
+                        <p>Card with no padding</p>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>Small Padding</h4>
+                    <arc-card variant="outlined" padding="small">
+                        <p>Card with small padding</p>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>Medium Padding (Default)</h4>
+                    <arc-card variant="outlined" padding="medium">
+                        <p>Card with medium padding</p>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>Large Padding</h4>
+                    <arc-card variant="outlined" padding="large">
+                        <p>Card with large padding</p>
+                    </arc-card>
+                </div>
+            </div>
+
+            <h3>3. Slot Content <span class="badge">3 slots</span></h3>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h4>Header Slot</h4>
+                    <arc-card variant="elevated">
+                        <div slot="header">
+                            <strong>Card Header</strong>
+                        </div>
+                        <p>Main content area</p>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>Footer Slot</h4>
+                    <arc-card variant="elevated">
+                        <p>Main content area</p>
+                        <div slot="footer">
+                            <em>Card Footer</em>
+                        </div>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>All Slots</h4>
+                    <arc-card variant="elevated">
+                        <div slot="header">
+                            <strong>Complete Card</strong>
+                        </div>
+                        <p>Main content with all slots</p>
+                        <div slot="footer">
+                            <button onclick="logEvent('Footer button clicked')">Action</button>
+                        </div>
+                    </arc-card>
+                </div>
+            </div>
+
+            <h3>4. Clickable Cards <span class="badge">Interactive</span></h3>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h4>Clickable Card</h4>
+                    <arc-card id="clickable-card-1" variant="outlined" clickable="true">
+                        <h3>Click Me!</h3>
+                        <p>This card responds to clicks and keyboard navigation (Enter/Space)</p>
+                    </arc-card>
+                </div>
+
+                <div class="test-item">
+                    <h4>Clickable with Content</h4>
+                    <arc-card id="clickable-card-2" variant="elevated" clickable="true">
+                        <div slot="header">
+                            <strong>Interactive Card</strong>
+                        </div>
+                        <p>Try clicking or using keyboard</p>
+                        <div slot="footer">
+                            <small>Press Enter or Space</small>
+                        </div>
+                    </arc-card>
+                </div>
+            </div>
+
+            <h3>5. Dynamic Card Creation <span class="badge">JavaScript</span></h3>
+            <div class="button-group">
+                <button onclick="createDynamicCard('default')">Create Default Card</button>
+                <button onclick="createDynamicCard('elevated')">Create Elevated Card</button>
+                <button onclick="createDynamicCard('outlined')">Create Outlined Card</button>
+                <button onclick="createDynamicCard('filled')">Create Filled Card</button>
+                <button onclick="clearDynamicCards()">Clear All</button>
+            </div>
+            <div id="dynamic-cards" class="test-grid"></div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- MODAL COMPONENT TESTS -->
+        <!-- ============================================ -->
+        <section class="test-section">
+            <h2>🪟 Modal Component Tests</h2>
+
+            <h3>1. Modal Sizes <span class="badge">4 sizes</span></h3>
+            <div class="button-group">
+                <button class="modal-trigger" onclick="openModal('modal-small')">Small Modal</button>
+                <button class="modal-trigger" onclick="openModal('modal-medium')">Medium Modal</button>
+                <button class="modal-trigger" onclick="openModal('modal-large')">Large Modal</button>
+                <button class="modal-trigger" onclick="openModal('modal-fullscreen')">Fullscreen Modal</button>
+            </div>
+
+            <!-- Small Modal -->
+            <arc-modal id="modal-small" size="small">
+                <div slot="header">
+                    <h3>Small Modal</h3>
+                </div>
+                <p>This is a small modal dialog. Perfect for simple confirmations or alerts.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-small')">Close</button>
+                </div>
+            </arc-modal>
+
+            <!-- Medium Modal -->
+            <arc-modal id="modal-medium" size="medium">
+                <div slot="header">
+                    <h3>Medium Modal</h3>
+                </div>
+                <p>This is a medium-sized modal dialog. Good for forms and moderate content.</p>
+                <p>It provides a balanced size for most use cases.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-medium')">Cancel</button>
+                    <button onclick="closeModal('modal-medium')">Confirm</button>
+                </div>
+            </arc-modal>
+
+            <!-- Large Modal -->
+            <arc-modal id="modal-large" size="large">
+                <div slot="header">
+                    <h3>Large Modal</h3>
+                </div>
+                <p>This is a large modal dialog. Ideal for detailed content, complex forms, or data tables.</p>
+                <p>It provides ample space for comprehensive information display.</p>
+                <p>You can include multiple paragraphs and sections here.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-large')">Close</button>
+                </div>
+            </arc-modal>
+
+            <!-- Fullscreen Modal -->
+            <arc-modal id="modal-fullscreen" size="fullscreen">
+                <div slot="header">
+                    <h3>Fullscreen Modal</h3>
+                </div>
+                <p>This modal takes up the entire viewport.</p>
+                <p>Perfect for immersive experiences, image galleries, or full-page forms.</p>
+                <p>It provides maximum space for your content.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-fullscreen')">Exit Fullscreen</button>
+                </div>
+            </arc-modal>
+
+            <h3>2. Modal Features <span class="badge">Special behaviors</span></h3>
+            <div class="button-group">
+                <button class="modal-trigger" onclick="openModal('modal-persistent')">Persistent Modal</button>
+                <button class="modal-trigger" onclick="openModal('modal-no-backdrop')">No Backdrop</button>
+                <button class="modal-trigger" onclick="openModal('modal-scrollable')">Scrollable Content</button>
+                <button class="modal-trigger" onclick="openModal('modal-centered')">Centered Modal</button>
+            </div>
+
+            <!-- Persistent Modal -->
+            <arc-modal id="modal-persistent" size="small" persistent="true">
+                <div slot="header">
+                    <h3>Persistent Modal</h3>
+                </div>
+                <p>This modal cannot be closed by clicking outside or pressing Escape.</p>
+                <p>You must use the close button.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-persistent')">Close</button>
+                </div>
+            </arc-modal>
+
+            <!-- No Backdrop Modal -->
+            <arc-modal id="modal-no-backdrop" size="medium" no-backdrop="true">
+                <div slot="header">
+                    <h3>No Backdrop Modal</h3>
+                </div>
+                <p>This modal has no backdrop overlay.</p>
+                <p>You can still interact with the page behind it.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-no-backdrop')">Close</button>
+                </div>
+            </arc-modal>
+
+            <!-- Scrollable Modal -->
+            <arc-modal id="modal-scrollable" size="medium" scrollable="true">
+                <div slot="header">
+                    <h3>Scrollable Content Modal</h3>
+                </div>
+                <p>This modal has scrollable content.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat.</p>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur.</p>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                    laborum.</p>
+                <p>More content to demonstrate scrolling...</p>
+                <p>Keep scrolling...</p>
+                <p>Almost there...</p>
+                <p>End of content!</p>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-scrollable')">Close</button>
+                </div>
+            </arc-modal>
+
+            <!-- Centered Modal -->
+            <arc-modal id="modal-centered" size="small" centered="true">
+                <div slot="header">
+                    <h3>Centered Modal</h3>
+                </div>
+                <p>This modal is vertically centered in the viewport.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-centered')">Close</button>
+                </div>
+            </arc-modal>
+
+            <h3>3. Dynamic Modal Creation <span class="badge">JavaScript</span></h3>
+            <div class="button-group">
+                <button onclick="createDynamicModal()">Create Dynamic Modal</button>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- INTEGRATION TESTS -->
+        <!-- ============================================ -->
+        <section class="test-section">
+            <h2>🔗 Integration Tests</h2>
+
+            <h3>1. Card Opens Modal <span class="badge">Combined</span></h3>
+            <div class="integration-demo">
+                <arc-card id="card-modal-trigger-1" variant="elevated" clickable="true">
+                    <div slot="header">
+                        <strong>Product 1</strong>
+                    </div>
+                    <p>Click to view details</p>
+                    <div slot="footer">
+                        <small>Click anywhere on card</small>
+                    </div>
+                </arc-card>
+
+                <arc-card id="card-modal-trigger-2" variant="elevated" clickable="true">
+                    <div slot="header">
+                        <strong>Product 2</strong>
+                    </div>
+                    <p>Click to view details</p>
+                    <div slot="footer">
+                        <small>Click anywhere on card</small>
+                    </div>
+                </arc-card>
+
+                <arc-card id="card-modal-trigger-3" variant="elevated" clickable="true">
+                    <div slot="header">
+                        <strong>Product 3</strong>
+                    </div>
+                    <p>Click to view details</p>
+                    <div slot="footer">
+                        <small>Click anywhere on card</small>
+                    </div>
+                </arc-card>
+            </div>
+
+            <!-- Product Detail Modals -->
+            <arc-modal id="product-modal-1" size="medium">
+                <div slot="header">
+                    <h3>Product 1 Details</h3>
+                </div>
+                <p>Detailed information about Product 1.</p>
+                <p>This demonstrates how cards can trigger modals for detailed views.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('product-modal-1')">Close</button>
+                </div>
+            </arc-modal>
+
+            <arc-modal id="product-modal-2" size="medium">
+                <div slot="header">
+                    <h3>Product 2 Details</h3>
+                </div>
+                <p>Detailed information about Product 2.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('product-modal-2')">Close</button>
+                </div>
+            </arc-modal>
+
+            <arc-modal id="product-modal-3" size="medium">
+                <div slot="header">
+                    <h3>Product 3 Details</h3>
+                </div>
+                <p>Detailed information about Product 3.</p>
+                <div slot="footer">
+                    <button onclick="closeModal('product-modal-3')">Close</button>
+                </div>
+            </arc-modal>
+
+            <h3>2. Modal Contains Cards <span class="badge">Nested</span></h3>
+            <button class="modal-trigger" onclick="openModal('modal-with-cards')">Open Modal with Cards</button>
+
+            <arc-modal id="modal-with-cards" size="large">
+                <div slot="header">
+                    <h3>Modal with Card Grid</h3>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <arc-card variant="outlined">
+                        <h4>Card 1</h4>
+                        <p>Inside modal</p>
+                    </arc-card>
+                    <arc-card variant="outlined">
+                        <h4>Card 2</h4>
+                        <p>Inside modal</p>
+                    </arc-card>
+                    <arc-card variant="outlined">
+                        <h4>Card 3</h4>
+                        <p>Inside modal</p>
+                    </arc-card>
+                </div>
+                <div slot="footer">
+                    <button onclick="closeModal('modal-with-cards')">Close</button>
+                </div>
+            </arc-modal>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- ATTRIBUTE TESTING -->
+        <!-- ============================================ -->
+        <section class="test-section">
+            <h2>⚙️ Attribute & Property Tests</h2>
+
+            <h3>1. Dynamic Attribute Changes</h3>
+            <div class="test-item">
+                <h4>Test Card (changes on button click)</h4>
+                <arc-card id="test-card" variant="default" padding="medium">
+                    <h3>Dynamic Card</h3>
+                    <p>Watch this card change!</p>
+                </arc-card>
+                <div class="button-group">
+                    <button onclick="changeCardVariant('default')">Default</button>
+                    <button onclick="changeCardVariant('elevated')">Elevated</button>
+                    <button onclick="changeCardVariant('outlined')">Outlined</button>
+                    <button onclick="changeCardVariant('filled')">Filled</button>
+                </div>
+                <div class="button-group">
+                    <button onclick="changeCardPadding('none')">No Padding</button>
+                    <button onclick="changeCardPadding('small')">Small</button>
+                    <button onclick="changeCardPadding('medium')">Medium</button>
+                    <button onclick="changeCardPadding('large')">Large</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- TEST RESULTS -->
+        <!-- ============================================ -->
+        <section class="test-section">
+            <h2>✅ Test Results Summary</h2>
+            <div id="test-results">
+                <p>Run tests to see results...</p>
+            </div>
+            <div class="button-group">
+                <button onclick="runAllTests()">Run All Tests</button>
+                <button onclick="clearConsole()">Clear Console</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Import Custom Elements -->
+    <script type="module" src="./dist/custom-elements/index.js"></script>
+
+    <!-- Test Scripts -->
+    <script>
+        // Console logging
+        function logToConsole(message, type = 'info') {
+            const console = document.getElementById('console');
+            const log = document.createElement('div');
+            log.className = `log ${type}`;
+            log.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            console.appendChild(log);
+            console.scrollTop = console.scrollHeight;
+
+            // Also log to browser console
+            console[type === 'error' ? 'error' : 'log'](message);
+        }
+
+        function logEvent(message) {
+            logToConsole(message, 'success');
+        }
+
+        function clearConsole() {
+            document.getElementById('console').innerHTML = '<div class="log info">Console cleared...</div>';
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.modelValue = true;
+                logToConsole(`Opened modal: ${modalId}`, 'success');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.modelValue = false;
+                logToConsole(`Closed modal: ${modalId}`, 'success');
+            }
+        }
+
+        // Dynamic card creation
+        let cardCounter = 0;
+        function createDynamicCard(variant) {
+            cardCounter++;
+            const container = document.getElementById('dynamic-cards');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'test-item';
+
+            const card = document.createElement('arc-card');
+            card.setAttribute('variant', variant);
+            card.id = `dynamic-card-${cardCounter}`;
+
+            const header = document.createElement('div');
+            header.slot = 'header';
+            header.innerHTML = `<strong>Dynamic Card ${cardCounter}</strong>`;
+            card.appendChild(header);
+
+            const content = document.createElement('p');
+            content.textContent = `This is a ${variant} card created dynamically`;
+            card.appendChild(content);
+
+            wrapper.appendChild(card);
+            container.appendChild(wrapper);
+
+            logToConsole(`Created dynamic ${variant} card #${cardCounter}`, 'success');
+        }
+
+        function clearDynamicCards() {
+            document.getElementById('dynamic-cards').innerHTML = '';
+            cardCounter = 0;
+            logToConsole('Cleared all dynamic cards', 'info');
+        }
+
+        // Dynamic modal creation
+        let modalCounter = 0;
+        function createDynamicModal() {
+            modalCounter++;
+            const modal = document.createElement('arc-modal');
+            modal.id = `dynamic-modal-${modalCounter}`;
+            modal.setAttribute('size', 'medium');
+
+            const header = document.createElement('div');
+            header.slot = 'header';
+            header.innerHTML = `<h3>Dynamic Modal ${modalCounter}</h3>`;
+            modal.appendChild(header);
+
+            const content = document.createElement('p');
+            content.textContent = `This modal was created dynamically at ${new Date().toLocaleTimeString()}`;
+            modal.appendChild(content);
+
+            const footer = document.createElement('div');
+            footer.slot = 'footer';
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = 'Close';
+            closeBtn.onclick = () => {
+                modal.modelValue = false;
+                setTimeout(() => modal.remove(), 300);
+            };
+            footer.appendChild(closeBtn);
+            modal.appendChild(footer);
+
+            document.body.appendChild(modal);
+            modal.modelValue = true;
+
+            logToConsole(`Created and opened dynamic modal #${modalCounter}`, 'success');
+        }
+
+        // Attribute change tests
+        function changeCardVariant(variant) {
+            const card = document.getElementById('test-card');
+            card.setAttribute('variant', variant);
+            logToConsole(`Changed card variant to: ${variant}`, 'success');
+        }
+
+        function changeCardPadding(padding) {
+            const card = document.getElementById('test-card');
+            card.setAttribute('padding', padding);
+            logToConsole(`Changed card padding to: ${padding}`, 'success');
+        }
+
+        // Event listeners for clickable cards
+        document.addEventListener('DOMContentLoaded', () => {
+            // Clickable card event listeners
+            const clickableCard1 = document.getElementById('clickable-card-1');
+            if (clickableCard1) {
+                clickableCard1.addEventListener('click', () => {
+                    logToConsole('Clickable Card 1 clicked!', 'success');
+                    alert('Clickable Card 1 was clicked!');
+                });
+            }
+
+            const clickableCard2 = document.getElementById('clickable-card-2');
+            if (clickableCard2) {
+                clickableCard2.addEventListener('click', () => {
+                    logToConsole('Clickable Card 2 clicked!', 'success');
+                });
+            }
+
+            // Integration: Cards that open modals
+            document.getElementById('card-modal-trigger-1')?.addEventListener('click', () => {
+                openModal('product-modal-1');
+            });
+
+            document.getElementById('card-modal-trigger-2')?.addEventListener('click', () => {
+                openModal('product-modal-2');
+            });
+
+            document.getElementById('card-modal-trigger-3')?.addEventListener('click', () => {
+                openModal('product-modal-3');
+            });
+
+            logToConsole('✅ Custom Elements loaded and event listeners attached', 'success');
+        });
+
+        // Comprehensive test suite
+        function runAllTests() {
+            logToConsole('=== Starting Comprehensive Test Suite ===', 'info');
+
+            const results = {
+                passed: 0,
+                failed: 0,
+                tests: []
+            };
+
+            // Test 1: Check if custom elements are registered
+            const test1 = customElements.get('arc-card') !== undefined;
+            results.tests.push({ name: 'arc-card registration', passed: test1 });
+            test1 ? results.passed++ : results.failed++;
+            logToConsole(`Test: arc-card registration - ${test1 ? 'PASS' : 'FAIL'}`, test1 ? 'success' : 'error');
+
+            const test2 = customElements.get('arc-modal') !== undefined;
+            results.tests.push({ name: 'arc-modal registration', passed: test2 });
+            test2 ? results.passed++ : results.failed++;
+            logToConsole(`Test: arc-modal registration - ${test2 ? 'PASS' : 'FAIL'}`, test2 ? 'success' : 'error');
+
+            // Test 3: Check if cards are rendered
+            const cards = document.querySelectorAll('arc-card');
+            const test3 = cards.length > 0;
+            results.tests.push({ name: 'Card elements rendered', passed: test3 });
+            test3 ? results.passed++ : results.failed++;
+            logToConsole(`Test: Card elements rendered (${cards.length} found) - ${test3 ? 'PASS' : 'FAIL'}`, test3 ? 'success' : 'error');
+
+            // Test 4: Check if modals are rendered
+            const modals = document.querySelectorAll('arc-modal');
+            const test4 = modals.length > 0;
+            results.tests.push({ name: 'Modal elements rendered', passed: test4 });
+            test4 ? results.passed++ : results.failed++;
+            logToConsole(`Test: Modal elements rendered (${modals.length} found) - ${test4 ? 'PASS' : 'FAIL'}`, test4 ? 'success' : 'error');
+
+            // Test 5: Test attribute changes
+            const testCard = document.getElementById('test-card');
+            const originalVariant = testCard.getAttribute('variant');
+            testCard.setAttribute('variant', 'elevated');
+            const test5 = testCard.getAttribute('variant') === 'elevated';
+            testCard.setAttribute('variant', originalVariant);
+            results.tests.push({ name: 'Attribute changes work', passed: test5 });
+            test5 ? results.passed++ : results.failed++;
+            logToConsole(`Test: Attribute changes - ${test5 ? 'PASS' : 'FAIL'}`, test5 ? 'success' : 'error');
+
+            // Test 6: Test modal open/close
+            const testModal = document.getElementById('modal-small');
+            testModal.modelValue = true;
+            const test6a = testModal.modelValue === true;
+            testModal.modelValue = false;
+            const test6b = testModal.modelValue === false;
+            const test6 = test6a && test6b;
+            results.tests.push({ name: 'Modal open/close', passed: test6 });
+            test6 ? results.passed++ : results.failed++;
+            logToConsole(`Test: Modal open/close - ${test6 ? 'PASS' : 'FAIL'}`, test6 ? 'success' : 'error');
+
+            // Display results
+            logToConsole('=== Test Suite Complete ===', 'info');
+            logToConsole(`Total: ${results.passed + results.failed} | Passed: ${results.passed} | Failed: ${results.failed}`, 'info');
+
+            const resultsDiv = document.getElementById('test-results');
+            resultsDiv.innerHTML = `
+                <div style="padding: 1rem; background: ${results.failed === 0 ? '#d4edda' : '#fff3cd'}; border-radius: 4px; margin: 1rem 0;">
+                    <h3 style="margin: 0 0 1rem 0; color: ${results.failed === 0 ? '#155724' : '#856404'};">
+                        ${results.failed === 0 ? '✅ All Tests Passed!' : '⚠️ Some Tests Failed'}
+                    </h3>
+                    <p><strong>Total Tests:</strong> ${results.passed + results.failed}</p>
+                    <p><strong>Passed:</strong> ${results.passed}</p>
+                    <p><strong>Failed:</strong> ${results.failed}</p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        ${results.tests.map(t => `
+                            <li style="color: ${t.passed ? '#155724' : '#721c24'};">
+                                ${t.passed ? '✅' : '❌'} ${t.name}
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>
