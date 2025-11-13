@@ -1,0 +1,21 @@
+{
+    "name": "vue-to-storybook-converter",
+    "version": "1.0.0",
+    "description": "Convert .story.vue files to Storybook .stories.js format",
+    "main": "convert-stories.js",
+    "type": "module",
+    "scripts": {
+        "convert": "node convert-stories.js"
+    },
+    "keywords": [
+        "vue",
+        "storybook",
+        "converter",
+        "sfc"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@vue/compiler-sfc": "^3.4.0"
+    }
+}

@@ -13,8 +13,9 @@ export default {
         docs: {
             description: {
                 component: 'A versatile button component with multiple variants and sizes.'
-            }
-        }
+            },
+            autodocs: true
+        },
     },
     argTypes: {
         variant: {
